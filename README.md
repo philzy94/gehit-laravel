@@ -1,2 +1,2 @@
 # gehit-laravel
-Bach end API of gehit using laravel 8
+Back end API of gehit using laravel 8
