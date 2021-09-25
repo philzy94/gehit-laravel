@@ -52,7 +52,7 @@ class LocationController extends Controller
             }
             else{
                 throw ValidationException::withMessages([
-                    'Error' => ['An error Occur']
+                    'Error' => ['An error Occured while trying to save location']
                 ]);
             }
 
@@ -124,7 +124,7 @@ class LocationController extends Controller
                     }
                     else{
                         throw ValidationException::withMessages([
-                            'Error' => ['An error Occur']
+                            'Error' => ['An error Occured while trying to update location']
                         ]);
                     }
 
