@@ -58,7 +58,7 @@ class ProfileController extends Controller
         }
         else{
             return response()->json(null, 200);
-        ;
+        
         }
 
     }

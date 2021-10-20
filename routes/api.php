@@ -41,14 +41,19 @@ Route::middleware(['auth:api'])->group(function () {
 
     });
 
-    Route::prefix('location')->group(function () {
+    
 
-        Route::post('/save', [LocationController::class, 'store']);
-        Route::put('/update/{id}', [LocationController::class, 'update']);
-        Route::delete('/delete/{id}', [LocationController::class, 'destroy']);
 
-    });
+});
 
+
+Route::prefix('location')->group(function () {
+
+    Route::get('/', [LocationController::class, 'index']);
+    Route::post('/save', [LocationController::class, 'store']);
+    Route::put('/update/{id}', [LocationController::class, 'update']);
+    Route::delete('/delete/{id}', [LocationController::class, 'destroy']);
+    Route::get('/{id}', [LocationController::class, 'show']);
 
 });
 

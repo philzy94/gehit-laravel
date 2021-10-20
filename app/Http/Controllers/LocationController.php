@@ -15,7 +15,7 @@ class LocationController extends Controller
      */
     public function index()
     {
-        //
+        return Location::all();
     }
 
     /**
@@ -67,9 +67,22 @@ class LocationController extends Controller
      * @param  \App\Models\Location  $location
      * @return \Illuminate\Http\Response
      */
-    public function show(Location $location)
+    public function show($id)
     {
-        //
+        
+       // return Location::all();
+        $location = Location::where('state_id', $id)->orderBy('location')->get();
+        if($location)
+        {
+            return response()->json($location, 200);
+            //return response()->json(Profile::find(auth('api')->user()->profile->id), 200);
+        }
+        else{
+            throw ValidationException::withMessages([
+                'Error' => ['An error Occured while trying to get location or location does not exist']
+            ]);
+        
+        }
     }
 
     /**
@@ -92,12 +105,14 @@ class LocationController extends Controller
      */
     public function update(Request $request, $id)
     {
+        
         $this->validate($request,[
             'location' => 'required',
 
             ]);
+        
         $location = Location::find($id);
-
+        
         if($location){
 
 
@@ -110,7 +125,7 @@ class LocationController extends Controller
 
                 }
 
-                if( $location->state_id != $request->state_id){
+                if($location->state_id != $request->state_id && $request->state_id != ""){
                     $this->validate($request,[
                         'state_id' => 'numeric',
                     ]);
@@ -142,6 +157,7 @@ class LocationController extends Controller
     public function destroy($id)
     {
         Location::destroy($id);
-        return response()->json("Successfully Deleted", 200);
+        return response()->json("delete successful", 200);        
     }
 }
+
