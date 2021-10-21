@@ -38,6 +38,7 @@ Route::middleware(['auth:api'])->group(function () {
         Route::post('/save', [SubCategoryController::class, 'store']);
         Route::put('/update/{id}', [SubCategoryController::class, 'update']);
         Route::delete('/delete/{id}', [SubCategoryController::class, 'destroy']);
+        Route::get('/{id}', [SubCategoryController::class, 'show']);
 
     });
 

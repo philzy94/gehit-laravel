@@ -44,6 +44,24 @@ class SubCategoryController extends Controller
      * @param  \App\Models\SubCategory  $subCategory
      * @return \Illuminate\Http\Response
      */
+
+    public function show($id)
+    {
+        
+  
+        $SubCategory = SubCategory::where('category_id', $id)->orderBy('sub_category')->get();
+        if($SubCategory)
+        {
+            return response()->json($SubCategory, 200);
+            //return response()->json(Profile::find(auth('api')->user()->profile->id), 200);
+        }
+        else{
+            throw ValidationException::withMessages([
+                'Error' => ['An error Occured while trying to get SubCategory or SubCategory does not exist']
+            ]);
+        
+        }
+    }
     public function update(Request $request, $id)
     {
         $this->validate($request,[
@@ -65,7 +83,7 @@ class SubCategoryController extends Controller
                     $subCategory->sub_category = $request->sub_category;
                 }
 
-                if( $subCategory->category_id != $request->category){
+                if( $subCategory->category_id != $request->category && $request->state_id != ""){
                     $this->validate($request,[
                         'category' => 'numeric|required',
                     ]);
