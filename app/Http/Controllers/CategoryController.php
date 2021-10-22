@@ -113,7 +113,10 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        try {
+        
+        Category::destroy($id);
+
+        /* try {
             if(Category::destroy($id)){
                 return response()->json("Successfully Deleted", 200);
                 }
@@ -128,6 +131,6 @@ class CategoryController extends Controller
             return $e->getMessage();
 
 
-        }
+        } */
     }
 }
